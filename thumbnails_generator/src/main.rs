@@ -19,9 +19,8 @@ fn thumbnail_generator(image_path: &str) {
     println!("percordo immagine {:?}", image_path);
      let img = image::open(image_path).unwrap();
     
-     //let filename: str = image_path.;
-     let filename = Path::new(& image_path).file_name();
-     println!("File name is {:?}", filename);
+    let filename = Path::new(& image_path).file_name().unwrap().to_str().unwrap();
+    println!("File name is {:?}", filename);
     
     println!("dimensions {:?}", img.dimensions());
    
@@ -34,11 +33,9 @@ fn thumbnail_generator(image_path: &str) {
     //img.resize(300, 300, image::imageops::FilterType::Gaussian);
     let thumb  = img.thumbnail(width/10, height/10);
 
-    let filename_tmp: String = format!("{:?}", filename).to_string();
-    let mut save_thumbnail_path: String=  "images/thumbnails/".to_owned();
-    let borrowed_string: String = save_thumbnail_path + filename_tmp;
-    
-    thumb.save(borrowed_string).unwrap();
+    let save_path: String = "images/thumbnails/".to_owned();    
+    let new_path = save_path + filename;
+    println!("percorso salvataggio thumbnails: {}", new_path);
 
-
+    thumb.save(new_path).unwrap();
 }
