@@ -9,8 +9,8 @@ fn main() {
     for file in fs::read_dir("images/originals").unwrap() {
         let img_path: String = file.unwrap().path().display().to_string();
         println!("show me the path: {}", img_path);
-        thumbnail_generator("images/originals/image_1.jpg");
-        //println!("{}", file.unwrap().path().display());
+        
+        thumbnail_generator(&img_path);
     }
    }
 
